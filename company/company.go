@@ -98,6 +98,8 @@ func (c *Company) HireMiner(minerType miners.MinersType) (miners.Miner, error) {
 }
 
 func (c *Company) GetAllMiners() map[miners.MinersType]map[uuid.UUID]miners.Miner {
+	c.mtx.RLock()
+	defer c.mtx.RUnlock()
 	tmp := make(map[miners.MinersType]map[uuid.UUID]miners.Miner)
 	for minerType, minersMap := range c.miners {
 		tmp[minerType] = make(map[uuid.UUID]miners.Miner)
@@ -109,6 +111,9 @@ func (c *Company) GetAllMiners() map[miners.MinersType]map[uuid.UUID]miners.Mine
 }
 
 func (c *Company) GetMinersByType(minerType miners.MinersType) map[uuid.UUID]miners.Miner {
+	c.mtx.RLock()
+	defer c.mtx.RUnlock()
+
 	tmp := make(map[uuid.UUID]miners.Miner)
 	for id, miner := range c.miners[minerType] {
 		tmp[id] = miner
