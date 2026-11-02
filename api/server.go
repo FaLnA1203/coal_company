@@ -24,7 +24,7 @@ func (server *Server) Run() error {
 	router.Get("/miners/price", server.HTTPHandler.PriceMinersHandler)
 	router.Get("/equipment/price", server.HTTPHandler.PriceEquipmentHandler)
 	router.Post("/miners/buy", server.HTTPHandler.BuyMinerHandler)
-	router.Post("/equpment/buy", server.HTTPHandler.BuyEquipmentHandler)
+	router.Post("/equipment/buy", server.HTTPHandler.BuyEquipmentHandler)
 	router.Get("/miners", server.HTTPHandler.HandlerGetMiners)
 	router.Get("/equipment", server.HTTPHandler.HandlerGetEquipment)
 	router.Get("/company", server.HTTPHandler.HandlerInfoCompany)

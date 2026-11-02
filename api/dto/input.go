@@ -1,9 +1,14 @@
 package dto
 
+import (
+	"coal_company/company/equipment"
+	"coal_company/company/miners"
+)
+
 type InputDTOMiner struct {
-	MinerType string `json:"miner_type"`
+	MinerType miners.MinersType `json:"miner_type"`
 }
 
 type InputDTOEquipment struct {
-	EquipmentType string `json:"equipment_type"`
+	EquipmentType equipment.EquipmentType `json:"equipment_type"`
 }

@@ -31,9 +31,10 @@ func NewMiddleMiner() *MiddleMiner {
 	power.Add(normalMinerPower)
 
 	return &MiddleMiner{
-		id:     uuid.New(),
-		energy: energy,
-		power:  power,
+		id:       uuid.New(),
+		energy:   energy,
+		power:    power,
+		interval: normalMinerlInterval,
 	}
 }
 

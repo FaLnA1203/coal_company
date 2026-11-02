@@ -59,6 +59,9 @@ func (m *LittleMiner) Run(ctx context.Context) <-chan Coal {
 			case <-ctx.Done():
 				return
 			case transferPoint <- Coal(m.power.Load()):
+				fmt.Printf("[%s] miner %d: coal sent\n",
+					time.Now().Format("15:04:05.000"), m.id)
+
 				if new := m.energy.Add(-1); new <= 0 {
 					return
 				}

@@ -17,8 +17,11 @@ type CompanyStatistics struct {
 }
 
 func NewCompanyStatistics() *CompanyStatistics {
+	balance := new(atomic.Int64)
+	balance.Store(1000000)
 	return &CompanyStatistics{
-		ballance:              &atomic.Int64{},
+		ballance: balance,
+
 		totalEarned:           &atomic.Int64{},
 		totalMinersStatistics: make(map[miners.MinersType]int),
 		createdTime:           time.Now(),

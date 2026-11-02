@@ -6,14 +6,14 @@ import (
 )
 
 type ErrorDTO struct {
-	Message string
-	Time    time.Time
+	Error string
+	Time  time.Time
 }
 
 func NewErrorDTO(message error) ErrorDTO {
 	return ErrorDTO{
-		Message: message.Error(),
-		Time:    time.Now(),
+		Error: message.Error(),
+		Time:  time.Now(),
 	}
 }
 

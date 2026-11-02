@@ -110,8 +110,8 @@ func (c *Company) GetAllMiners() map[miners.MinersType]map[uuid.UUID]miners.Mine
 
 func (c *Company) GetMinersByType(minerType miners.MinersType) map[uuid.UUID]miners.Miner {
 	tmp := make(map[uuid.UUID]miners.Miner)
-	for minerType, miner := range c.miners[minerType] {
-		tmp[minerType] = miner
+	for id, miner := range c.miners[minerType] {
+		tmp[id] = miner
 	}
 	return tmp
 }
@@ -125,7 +125,7 @@ func (c *Company) BuyEquipment(equipmentType equipment.EquipmentType) (equipment
 		if !c.equipment.PickaxesPurchased() {
 			if c.statistics.ballance.Load() >= 3000 {
 				c.equipment.BuyPickaxe()
-				c.statistics.ballance.Add(3000)
+				c.statistics.ballance.Add(-3000)
 			} else {
 				return equipment.Equipment{}, ErrInsufficientFunds
 			}
@@ -182,7 +182,7 @@ func (c *Company) collectIncome() {
 			return
 		case income := <-c.incomeCh:
 			c.statistics.ballance.Add(int64(income))
-			fmt.Println("ballance:", c.statistics.ballance)
+			fmt.Println("ballance:", c.statistics.ballance.Load())
 
 			c.statistics.totalEarned.Add(int64(income))
 		}
